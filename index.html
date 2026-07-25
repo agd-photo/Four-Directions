@@ -329,17 +329,98 @@
 
     const TOTAL = 86;
 
-    // Default layout — repeating pattern until you provide your order
-    // Replace this with your explicit layout list when ready
-    const spanPattern = [4, 2, 2, 2, 2, 6, 3, 3, 2, 4];
+    const layout = [
+      // — Your layout —
+      { n: 1, span: 6 },
+      { n: 2, span: 3 }, { n: 3, span: 3 },
+      { n: 4, span: 6 },
+      { n: 5, span: 6 },
+      { n: 6, span: 3 }, { n: 8, span: 3 },
+      { n: 7, span: 6 },
+      { n: 10, span: 2 }, { n: 18, span: 2 }, { n: 9, span: 2 },
+      // — Remaining (default order, update as you go) —
+      { n: 11, span: 4 },
+      { n: 12, span: 2 },
+      { n: 13, span: 2 },
+      { n: 14, span: 2 },
+      { n: 15, span: 2 },
+      { n: 16, span: 6 },
+      { n: 17, span: 3 },
+      { n: 19, span: 3 },
+      { n: 20, span: 2 },
+      { n: 21, span: 4 },
+      { n: 22, span: 4 },
+      { n: 23, span: 2 },
+      { n: 24, span: 2 },
+      { n: 25, span: 2 },
+      { n: 26, span: 2 },
+      { n: 27, span: 6 },
+      { n: 28, span: 3 },
+      { n: 29, span: 3 },
+      { n: 30, span: 2 },
+      { n: 31, span: 4 },
+      { n: 32, span: 4 },
+      { n: 33, span: 2 },
+      { n: 34, span: 2 },
+      { n: 35, span: 2 },
+      { n: 36, span: 2 },
+      { n: 37, span: 6 },
+      { n: 38, span: 3 },
+      { n: 39, span: 3 },
+      { n: 40, span: 2 },
+      { n: 41, span: 4 },
+      { n: 42, span: 4 },
+      { n: 43, span: 2 },
+      { n: 44, span: 2 },
+      { n: 45, span: 2 },
+      { n: 46, span: 2 },
+      { n: 47, span: 6 },
+      { n: 48, span: 3 },
+      { n: 49, span: 3 },
+      { n: 50, span: 2 },
+      { n: 51, span: 4 },
+      { n: 52, span: 4 },
+      { n: 53, span: 2 },
+      { n: 54, span: 2 },
+      { n: 55, span: 2 },
+      { n: 56, span: 2 },
+      { n: 57, span: 6 },
+      { n: 58, span: 3 },
+      { n: 59, span: 3 },
+      { n: 60, span: 2 },
+      { n: 61, span: 4 },
+      { n: 62, span: 4 },
+      { n: 63, span: 2 },
+      { n: 64, span: 2 },
+      { n: 65, span: 2 },
+      { n: 66, span: 2 },
+      { n: 67, span: 6 },
+      { n: 68, span: 3 },
+      { n: 69, span: 3 },
+      { n: 70, span: 2 },
+      { n: 71, span: 4 },
+      { n: 72, span: 4 },
+      { n: 73, span: 2 },
+      { n: 74, span: 2 },
+      { n: 75, span: 2 },
+      { n: 76, span: 2 },
+      { n: 77, span: 6 },
+      { n: 78, span: 3 },
+      { n: 79, span: 3 },
+      { n: 80, span: 2 },
+      { n: 81, span: 4 },
+      { n: 82, span: 4 },
+      { n: 83, span: 2 },
+      { n: 84, span: 2 },
+      { n: 85, span: 2 },
+      { n: 86, span: 2 },
+    ];
 
     const grid = document.getElementById('grid');
     const imgEls = [];
 
-    for (let i = 0; i < TOTAL; i++) {
-      const n = i + 1;
+    layout.forEach(({ n, span }, i) => {
       const file = `photo (${n}).jpg`;
-      const span = spanPattern[i % spanPattern.length];
 
       const item = document.createElement('div');
       item.className = `photo-item span-${span}`;
@@ -372,7 +453,7 @@
       item.appendChild(inner);
       item.appendChild(shield);
       grid.appendChild(item);
-    }
+    });
 
     // ── Lightbox ────────────────────────────────────────────
     const lightbox  = document.getElementById('lightbox');
