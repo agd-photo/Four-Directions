@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Four Directions — Gaige Davila</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #080706;
+      --text:    #f2c12e;
+      --muted:   #a07e10;
+      --accent:  #c41e2a;
+      --border:  #1c1a18;
+      --gap:     2px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Karla', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ───────────────────────────────────────────── */
+    header {
+      padding: 52px 40px 40px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .title-block {
+      flex: 1;
+    }
+
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 10vw, 148px);
+      line-height: 0.85;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    /* Metadata sits at the bottom-right, small and precise */
+    .meta-block {
+      text-align: right;
+      flex-shrink: 0;
+      padding-bottom: 8px;
+    }
+
+    .meta-location {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .meta-date {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .meta-credit {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+    }
+
+    /* ── HORIZON RULE — the signature element ─────────────── */
+    /* A single copper line. Nothing more. */
+    .horizon {
+      width: 100%;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 0;
+    }
+
+    /* ── GRID ─────────────────────────────────────────────── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: var(--gap);
+      background: var(--gap-color, #111010);
+    }
+
+    .photo-item {
+      position: relative;
+      overflow: hidden;
+      background: #0f0e0d;
+      cursor: pointer;
+    }
+
+    .photo-inner {
+      display: block;
+    }
+
+    .photo-inner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: opacity 0.4s ease;
+      opacity: 0;
+      -webkit-user-drag: none;
+      user-drag: none;
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: none;
+    }
+
+    .photo-inner img.loaded {
+      opacity: 1;
+    }
+
+    /* Transparent shield over each photo */
+    .photo-shield {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      user-select: none;
+    }
+
+    .photo-label {
+      font-family: 'Karla', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: #2a2826;
+      text-align: center;
+      padding: 20px 0;
+      user-select: none;
+    }
+
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+
+    /* ── LIGHTBOX ─────────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 4, 3, 0.97);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 22px;
+      right: 28px;
+      font-family: 'Karla', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover { color: var(--text); }
+
+    .lightbox-counter {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Karla', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .lightbox-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 20px;
+      padding: 20px;
+      transition: color 0.2s;
+    }
+
+    .lightbox-nav:hover { color: var(--text); }
+    .lightbox-nav.prev { left: 16px; }
+    .lightbox-nav.next { right: 16px; }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer {
+      padding: 36px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .footer-left {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .footer-left strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .footer-right {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .meta-block { text-align: left; }
+      .page-title { white-space: normal; font-size: clamp(56px, 12vw, 100px); }
+      .photo-grid { grid-template-columns: repeat(4, 1fr); }
+      .span-2 { grid-column: span 2; }
+      .span-3 { grid-column: span 2; }
+      .span-4 { grid-column: span 4; }
+      .span-6 { grid-column: span 4; }
+    }
+
+    @media (max-width: 560px) {
+      header { padding: 36px 20px 28px; }
+      footer { padding: 28px 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .span-2, .span-3, .span-4, .span-6 { grid-column: span 2; }
+    }
+
+    /* ── DOWNLOAD PROTECTION ──────────────────────────────── */
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────────── -->
+  <header>
+    <div class="title-block">
+      <h1 class="page-title">Four Directions</h1>
+    </div>
+    <div class="meta-block">
+      <span class="meta-location">Window Rock, Arizona</span>
+      <span class="meta-date">July 20, 2026</span>
+      <span class="meta-credit">Photography by Gaige Davila</span>
+    </div>
+  </header>
+
+  <!-- ── HORIZON RULE ─────────────────────────────────────── -->
+  <div class="horizon"></div>
+
+  <!-- ── PHOTO GRID ──────────────────────────────────────── -->
+  <div class="photo-grid" id="grid"></div>
+
+  <!-- ── LIGHTBOX ────────────────────────────────────────── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Photo viewer">
+    <button class="lightbox-close" id="lb-close">Close ✕</button>
+    <button class="lightbox-nav prev" id="lb-prev">&#8592;</button>
+    <img class="lightbox-img" id="lb-img" src="" alt="" />
+    <button class="lightbox-nav next" id="lb-next">&#8594;</button>
+    <div class="lightbox-counter" id="lb-counter"></div>
+  </div>
+
+  <!-- ── FOOTER ──────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-left">Photography — <strong>Gaige Davila</strong></div>
+    <div class="footer-right">Window Rock, AZ &nbsp;·&nbsp; July 20, 2026</div>
+  </footer>
+
+  <script>
+    /*
+      ─────────────────────────────────────────────────────────
+      PHOTO CONFIGURATION
+      ─────────────────────────────────────────────────────────
+      Photos should be named: photo (1).jpg through photo (86).jpg
+      and placed in the same folder as this HTML file.
+
+      To assign a custom layout order, replace the layout array
+      below with your own sequence — same format as the AIM page.
+      ─────────────────────────────────────────────────────────
+    */
+
+    const TOTAL = 86;
+
+    // Default layout — repeating pattern until you provide your order
+    // Replace this with your explicit layout list when ready
+    const spanPattern = [4, 2, 2, 2, 2, 6, 3, 3, 2, 4];
+
+    const grid = document.getElementById('grid');
+    const imgEls = [];
+
+    for (let i = 0; i < TOTAL; i++) {
+      const n = i + 1;
+      const file = `photo (${n}).jpg`;
+      const span = spanPattern[i % spanPattern.length];
+
+      const item = document.createElement('div');
+      item.className = `photo-item span-${span}`;
+
+      const inner = document.createElement('div');
+      inner.className = 'photo-inner';
+
+      const img = document.createElement('img');
+      img.src = file;
+      img.alt = `Photo ${n}`;
+      img.loading = 'lazy';
+      img.onload = () => img.classList.add('loaded');
+      img.onerror = () => {
+        img.style.display = 'none';
+        const label = document.createElement('div');
+        label.className = 'photo-label';
+        label.textContent = `photo (${n}).jpg`;
+        inner.appendChild(label);
+      };
+
+      imgEls.push({ img, file, index: i });
+
+      const shield = document.createElement('div');
+      shield.className = 'photo-shield';
+      shield.addEventListener('contextmenu', e => e.preventDefault());
+      shield.addEventListener('dragstart', e => e.preventDefault());
+      shield.addEventListener('click', () => openLightbox(i));
+
+      inner.appendChild(img);
+      item.appendChild(inner);
+      item.appendChild(shield);
+      grid.appendChild(item);
+    }
+
+    // ── Lightbox ────────────────────────────────────────────
+    const lightbox  = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
+    let current = 0;
+
+    function openLightbox(i) {
+      current = i;
+      lbImg.src = imgEls[i].file;
+      lbImg.alt = `Photo ${i + 1}`;
+      lbCounter.textContent = `${i + 1} / ${TOTAL}`;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+      current = (current + dir + TOTAL) % TOTAL;
+      lbImg.src = imgEls[current].file;
+      lbCounter.textContent = `${current + 1} / ${TOTAL}`;
+    }
+
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    document.getElementById('lb-prev').addEventListener('click', () => navigate(-1));
+    document.getElementById('lb-next').addEventListener('click', () => navigate(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) {
+        if (e.ctrlKey && (e.key === 's' || e.key === 'u')) e.preventDefault();
+        if (e.ctrlKey && e.shiftKey && e.key === 'I') e.preventDefault();
+        return;
+      }
+      if (e.key === 'Escape')    closeLightbox();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('dragstart', e => {
+      if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+  </script>
+
+</body>
+</html>
