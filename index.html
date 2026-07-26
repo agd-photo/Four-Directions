@@ -432,22 +432,11 @@
       img.loading = 'lazy';
 
       img.onerror = () => {
-        img.style.display = 'none';
-        item.style.background = 'transparent';
-        item.style.border = '1px solid #2a2826';
-        const label = document.createElement('div');
-        label.className = 'photo-label';
-        label.textContent = `photo (${n}).jpg`;
-        inner.appendChild(label);
+        item.style.display = 'none';
       };
 
-      // Show filename label on every loaded photo
       img.onload = () => {
         img.classList.add('loaded');
-        const label = document.createElement('div');
-        label.className = 'photo-label';
-        label.textContent = `photo (${n}).jpg`;
-        inner.appendChild(label);
       };
 
       imgEls.push({ img, file, index: i });
