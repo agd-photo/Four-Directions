@@ -278,9 +278,29 @@
 
     .description-rule {
       border: none;
-      border-top: 1px solid #c41e2a;
-      opacity: 0.4;
-      margin: 24px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .description-rule::before,
+    .description-rule::after {
+      content: "";
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: #c41e2a;
+      transform: rotate(45deg);
+    }
+
+    .description-rule-center {
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: #f2c12e;
+      transform: rotate(45deg);
     }
 
     /* ── FOOTER ───────────────────────────────────────────── */
@@ -359,10 +379,10 @@
   <!-- ── DESCRIPTION ──────────────────────────────────────── -->
   <div class="description-block">
     <div class="description-inner">
-    <p class="description-text">American Indian Movement (AIM) chapters from Arizona and California marched from four directions in Window Rock, Arizona, the capital of the Navajo Nation, on the first day of the 2026 council summer session and a day before the primary for president of the tribal government. Those in the march included the families of murdered or missing indigenous people (MMIP) that AIM is helping. The march ended at the front door of the Navajo Nation Council Chambers.</p>
-    <hr class="description-rule">
+    <p class="description-text">American Indian Movement (AIM) chapters from Arizona and California marched from four directions in Window Rock, Arizona, the capital of the Navajo Nation, on the first day of the 2026 council summer session and a day before the primary for president of the tribal government. Those in the march included the families of murdered or missing indigenous people (MMIP) that AIM is helping seek justice, or find, their loved ones. The march ended at the front door of the Navajo Nation Council Chambers.</p>
+    <div class="description-rule"><span class="description-rule-center"></span></div>
     <p class="description-text">In a rare confrontation, AIM members made Buu Nygren, the president of the Navajo Nation, stand and listen to the stories of dozens of family members. Many of the chants, and signs, in the march called for Nygren's removal from office for alleged misuse of funds, not addressing MMIP and for not interjecting in a massive expansion of a coal mine on the Navajo Nation. After almost two hours of hearing testimonials, Nygren said he could not write laws, policies or allocate money to causes, only that he could sign laws passed by the council. The next day, Nygren lost the primary to two of the 16 candidates running for Navajo Nation president. He will leave office in January 2027 after serving one term.</p>
-    <hr class="description-rule">
+    <div class="description-rule"><span class="description-rule-center"></span></div>
     <p class="description-text">Four directions refers to the four mountains surrounding Dinétah (the Navajo homeland), the four cardinal directions, four colors (white, blue, yellow and black), four seasons and four stages of life. The number four is the physical and metaphysical orientation of Diné (Navajo) culture.</p>
     </div>
   </div>
@@ -451,9 +471,9 @@
       { n: 76, span: 3 }, { n: 80, span: 3 },
       { n: 77, span: 3 }, { n: 78, span: 3 },
       { n: 79, span: 6 },
-      { n: 81, span: 2 }, { n: 83, span: 2 }, { n: 84, span: 2 },
+      { n: 81, span: 2 }, { n: 86, span: 2 }, { n: 84, span: 2 },
       { n: 82, span: 6 },
-      { n: 86, span: 6 },
+      { n: 83, span: 6 },
     ];
 
     const grid = document.getElementById('grid');
