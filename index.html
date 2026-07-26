@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Four Directions — Gaige Davila</title>
+  <title>Four Direction Spiritual Walk — Gaige Davila</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:wght@400;500&display=swap" rel="stylesheet">
@@ -235,6 +235,24 @@
     .lightbox-nav.prev { left: 16px; }
     .lightbox-nav.next { right: 16px; }
 
+    /* ── DESCRIPTION ─────────────────────────────────────── */
+    .description-block {
+      padding: 0 40px 48px;
+    }
+
+    .description-text {
+      font-family: 'Karla', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: #c8c4bc;
+      max-width: 100%;
+      margin-bottom: 28px;
+    }
+
+    .description-text:last-child {
+      margin-bottom: 0;
+    }
+
     /* ── FOOTER ───────────────────────────────────────────── */
     footer {
       padding: 36px 40px;
@@ -278,6 +296,8 @@
 
     @media (max-width: 560px) {
       header { padding: 36px 20px 28px; }
+      .description-block { padding: 0 20px 36px; }
+      .description-text { font-size: 14px; }
       footer { padding: 28px 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
       .photo-grid { grid-template-columns: repeat(2, 1fr); }
       .span-2, .span-3, .span-4, .span-6 { grid-column: span 2; }
@@ -298,7 +318,7 @@
   <!-- ── HEADER ──────────────────────────────────────────── -->
   <header>
     <div class="title-block">
-      <h1 class="page-title">Four Directions</h1>
+      <h1 class="page-title">Four Direction Spiritual Walk</h1>
     </div>
     <div class="meta-block">
       <span class="meta-location">Window Rock, Arizona</span>
@@ -306,6 +326,12 @@
       <span class="meta-credit">Photography by Gaige Davila</span>
     </div>
   </header>
+
+  <!-- ── DESCRIPTION ──────────────────────────────────────── -->
+  <div class="description-block">
+    <p class="description-text">American Indian Movement (AIM) chapters from Arizona and California marched from four directions in Window Rock, Arizona, the capital of the Navajo Nation, on the first day of the 2026 council summer session and a day before the primary for president of the tribal government. Those in the march included the families of murdered or missing indigenous people (MMIP) that AIM is helping. The march ended at the front door of the Navajo Nation Council Chambers. In a rare confrontation, AIM members made Buu Nygren, the president of the Navajo Nation, stand and listen to the stories of dozens of family members. Many of the chants, and signs, in the march called for Nygren's removal from office for alleged misuse of funds, not addressing MMIP and for not interjecting in a massive expansion of a coal mine on the Navajo Nation. After almost two hours of hearing testimonials, Nygren said he could not write laws, policies or allocate money to causes, only that he could sign laws passed by the council. The next day, Nygren lost the primary to two of the 16 candidates running for Navajo Nation president. He will leave office in January 2027 after serving one term.</p>
+    <p class="description-text">Four directions refers to the four mountains surrounding Dinétah (the Navajo homeland), the four cardinal directions, four colors (white, blue, yellow and black), four seasons and four stages of life. The number four is the physical and metaphysical orientation of Diné (Navajo) culture.</p>
+  </div>
 
   <!-- ── HORIZON RULE ─────────────────────────────────────── -->
   <div class="horizon"></div>
@@ -356,8 +382,7 @@
       { file: 'NIK0560.jpg', span: 3, fill: true },
       { n: 12, span: 6 },
       { n: 13, span: 3 }, { n: 14, span: 3 },
-      { n: 16, span: 3 }, { n: 17, span: 3 },
-      { n: 19, span: 6 },
+      { n: 16, span: 2 }, { n: 19, span: 2 }, { n: 17, span: 2 },
       { n: 20, span: 6 },
       { n: 21, span: 6 },
       { n: 22, span: 2 }, { n: 26, span: 2 }, { n: 25, span: 2 },
