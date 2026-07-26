@@ -31,31 +31,26 @@
 
     /* ── HEADER ───────────────────────────────────────────── */
     header {
-      padding: 52px 40px 40px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
+      padding: 52px 40px 32px;
     }
 
     .title-block {
-      flex: 1;
+      margin-bottom: 16px;
     }
 
     .page-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(72px, 10vw, 148px);
+      font-size: clamp(48px, 8vw, 128px);
       line-height: 0.85;
       letter-spacing: 0.02em;
       color: var(--text);
-      white-space: nowrap;
     }
 
-    /* Metadata sits at the bottom-right, small and precise */
     .meta-block {
-      text-align: right;
-      flex-shrink: 0;
-      padding-bottom: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 16px;
     }
 
     .meta-location {
@@ -63,8 +58,6 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text);
-      display: block;
-      margin-bottom: 4px;
     }
 
     .meta-date {
@@ -72,8 +65,6 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      display: block;
-      margin-bottom: 4px;
     }
 
     .meta-credit {
@@ -81,7 +72,6 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      display: block;
     }
 
     /* ── HORIZON RULE — the signature element ─────────────── */
@@ -237,16 +227,22 @@
 
     /* ── DESCRIPTION ─────────────────────────────────────── */
     .description-block {
-      padding: 0 40px 48px;
+      padding: 0 40px 56px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .description-inner {
+      max-width: 700px;
+      width: 100%;
     }
 
     .description-text {
       font-family: 'Karla', sans-serif;
       font-size: 15px;
-      line-height: 1.75;
+      line-height: 1.8;
       color: #c8c4bc;
-      max-width: 100%;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .description-text:last-child {
@@ -284,9 +280,7 @@
 
     /* ── RESPONSIVE ───────────────────────────────────────── */
     @media (max-width: 900px) {
-      header { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .meta-block { text-align: left; }
-      .page-title { white-space: normal; font-size: clamp(56px, 12vw, 100px); }
+      .page-title { font-size: clamp(40px, 10vw, 100px); }
       .photo-grid { grid-template-columns: repeat(4, 1fr); }
       .span-2 { grid-column: span 2; }
       .span-3 { grid-column: span 2; }
@@ -298,6 +292,7 @@
       header { padding: 36px 20px 28px; }
       .description-block { padding: 0 20px 36px; }
       .description-text { font-size: 14px; }
+      .description-inner { max-width: 100%; }
       footer { padding: 28px 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
       .photo-grid { grid-template-columns: repeat(2, 1fr); }
       .span-2, .span-3, .span-4, .span-6 { grid-column: span 2; }
@@ -329,8 +324,10 @@
 
   <!-- ── DESCRIPTION ──────────────────────────────────────── -->
   <div class="description-block">
+    <div class="description-inner">
     <p class="description-text">American Indian Movement (AIM) chapters from Arizona and California marched from four directions in Window Rock, Arizona, the capital of the Navajo Nation, on the first day of the 2026 council summer session and a day before the primary for president of the tribal government. Those in the march included the families of murdered or missing indigenous people (MMIP) that AIM is helping. The march ended at the front door of the Navajo Nation Council Chambers. In a rare confrontation, AIM members made Buu Nygren, the president of the Navajo Nation, stand and listen to the stories of dozens of family members. Many of the chants, and signs, in the march called for Nygren's removal from office for alleged misuse of funds, not addressing MMIP and for not interjecting in a massive expansion of a coal mine on the Navajo Nation. After almost two hours of hearing testimonials, Nygren said he could not write laws, policies or allocate money to causes, only that he could sign laws passed by the council. The next day, Nygren lost the primary to two of the 16 candidates running for Navajo Nation president. He will leave office in January 2027 after serving one term.</p>
     <p class="description-text">Four directions refers to the four mountains surrounding Dinétah (the Navajo homeland), the four cardinal directions, four colors (white, blue, yellow and black), four seasons and four stages of life. The number four is the physical and metaphysical orientation of Diné (Navajo) culture.</p>
+    </div>
   </div>
 
   <!-- ── HORIZON RULE ─────────────────────────────────────── -->
