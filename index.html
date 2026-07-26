@@ -339,7 +339,9 @@
       { n: 6, span: 3 }, { n: 8, span: 3 },
       { n: 7, span: 6 },
       { n: 10, span: 2 }, { n: 18, span: 2 }, { n: 9, span: 2 },
-      { n: 11, span: 3 }, { n: 15, span: 3 },
+      { n: 11, span: 3 },
+      { n: 15, span: 3, rowSpan: 2 },
+      { file: 'three panel photo.jpg', span: 3 },
       { n: 12, span: 6 },
       { n: 13, span: 3 }, { n: 14, span: 3 },
       { n: 16, span: 3 }, { n: 17, span: 3 },
@@ -417,11 +419,14 @@
     const grid = document.getElementById('grid');
     const imgEls = [];
 
-    layout.forEach(({ n, span }, i) => {
-      const file = `photo (${n}).jpg`;
+    layout.forEach((entry, i) => {
+      const { span, rowSpan } = entry;
+      const n = entry.n || null;
+      const file = entry.file || `photo (${n}).jpg`;
 
       const item = document.createElement('div');
       item.className = `photo-item span-${span}`;
+      if (rowSpan) item.style.gridRow = `span ${rowSpan}`;
 
       const inner = document.createElement('div');
       inner.className = 'photo-inner';
