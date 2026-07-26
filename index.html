@@ -125,6 +125,19 @@
       pointer-events: none;
     }
 
+    .photo-item.fill-cell {
+      height: 100%;
+    }
+
+    .photo-item.fill-cell .photo-inner {
+      height: 100%;
+    }
+
+    .photo-item.fill-cell .photo-inner img {
+      height: 100%;
+      object-fit: cover;
+    }
+
     .photo-inner img.loaded {
       opacity: 1;
     }
@@ -341,7 +354,7 @@
       { n: 10, span: 2 }, { n: 18, span: 2 }, { n: 9, span: 2 },
       { n: 11, span: 3 },
       { n: 15, span: 3, rowSpan: 2 },
-      { file: 'NIK0560.jpg', span: 3 },
+      { file: 'NIK0560.jpg', span: 3, fill: true },
       { n: 12, span: 6 },
       { n: 13, span: 3 }, { n: 14, span: 3 },
       { n: 16, span: 3 }, { n: 17, span: 3 },
@@ -424,9 +437,14 @@
       const n = entry.n || null;
       const file = entry.file || `photo (${n}).jpg`;
 
+      const { fill } = entry;
       const item = document.createElement('div');
-      item.className = `photo-item span-${span}`;
+      item.className = `photo-item span-${span}${fill ? ' fill-cell' : ''}`;
       if (rowSpan) item.style.gridRow = `span ${rowSpan}`;
+      if (fill) {
+        item.style.height = '100%';
+        item.style.minHeight = '100%';
+      }
 
       const inner = document.createElement('div');
       inner.className = 'photo-inner';
